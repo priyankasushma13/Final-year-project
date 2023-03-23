@@ -1,0 +1,223 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Fare Prediction</title>
+    <style>
+		
+        /* styling navlist */
+        #navlist {
+           
+            position: absolute;
+            width: 100%;
+        }
+            
+        /* styling navlist anchor element */
+     .ab1{
+            float:left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 25px;
+            margin-left: 200px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .ab2{
+            
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 25px;
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 20px;
+
+        }
+        .navlist-right{
+            float:right;
+        }
+    
+        /* hover effect of navlist anchor element */
+        .bar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .bg-container{
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQykND5hiJyWgMUR9SfTWwOPS1Sq3Z-WUqADA&usqp=CAU");
+            background-size:cover;
+            background-repeat: no-repeat;
+            height: 97vh;
+            width: 98vw;
+
+        }
+        .btn1{
+            margin-left:300px;
+            display:inline-block;
+        }
+        .out{
+            color:#ffffff;
+        }
+        .card{
+            margin: 0px;
+        }
+        .heading{
+            margin-left: 300px;
+            margin-top: 10px;
+            font-size:40px;
+            color:black;
+            font-family: sans-serif;
+        }
+        .heading a{
+            
+            color:white;
+        }
+        .res1{
+            margin-left: 200px;
+        }
+
+    </style>
+    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+   
+
+</head>
+<script>
+    function validateForm() {
+      var x = document.forms["myForm"]["distance"].value;
+      if (x == "" || x == null||x<0) {
+        alert("Distance must be filled out and must be a positive value");
+        return false;
+      }
+    }
+    </script>
+
+<body >
+    
+    <!-- <div id="navlist">
+        <h1 class="heading"><a href="/">CAB FARE PREDICTION</a></h1>
+        <div class="navlist-right">
+        <a class="ab" href="/about.html">About</a>
+        <a class="ab" href="ContactUs.html">Contact Us</a>
+        </div>
+    </div> -->
+    <div class="bg-container">
+        <div class="d-flex flex-row bar">
+            <h1 class="heading"><a href="/">CAB FARE PREDICTION</a></h1>
+            <a class="ab1" href="/about.html">About</a>
+            <a class="ab2" href="ContactUs.html">Contact Us</a>
+        </div>
+        
+        <br>
+
+
+    <div class="ml-5">
+        <form name="myForm" action="/predict" method="POST" onsubmit="return validateForm()" required>
+
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">DateTime</h5>
+                            <input type="datetime-local" name="day" id="day" required="required">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Day of the week</h5>
+                            <select name="DayofWeek" required="required">
+                                <option selected disabled value="">Enter Day of the week</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <br>
+            <br>
+            <div class="row">
+            
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Distance</h5>
+                            <input type="text" name="distance" placeholder="enter distance">
+                        </div>
+                    </div>
+                </div>
+            <br>
+            <br>
+
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">No of Passengers</h5>
+                                <select name="passenger_count" required="required" placeholder="enter passenger_count">
+                                    <option selected disabled value="">No of Passengers</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                        </div> 
+                    </div> 
+                </div>
+            </div>    
+                <br>
+                <br>
+                
+                <div class="d-flex flex-row justify-content-start">
+                    <button class="btn btn-warning btn1">Get Fare</button>
+                </div>
+                <br>
+           
+        </form>
+
+        <div class="res1">
+            {% if prediction %}
+            <h2 class="out">{{prediction}}</h2>
+            {% endif %}
+        </div>
+        
+
+        <br>
+        <br>
+
+    
+    </div>
+
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        
+crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+        
+
+</body>
+</html>
